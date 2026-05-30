@@ -17,6 +17,12 @@ optimism/
 
 # Downloaded binaries
 op-deployer
+op-deployer.exe
+op-deployer-linux
+op-deployer-download/
+
+# Local op-deployer scratch workdirs
+tmp-custom-init/
 
 # Logs
 *.log
