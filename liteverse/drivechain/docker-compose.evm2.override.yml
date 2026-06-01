@@ -40,6 +40,8 @@ services:
 
   batcher:
     container_name: liteverse-evm2-op-batcher
+    environment:
+      - OP_BATCHER_THROTTLE_THRESHOLD=0
     extra_hosts:
       - "rpc.liteverse.xyz:172.28.0.11"
     networks:
