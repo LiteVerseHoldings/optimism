@@ -1,0 +1,16 @@
+{
+  "id": 2,
+  "name": "LiteVerse OP Stack",
+  "stack": "op-stack",
+  "role": "drivechain-evm-runtime",
+  "chainId": 713318,
+  "rpcUrl": "http://127.0.0.1:9545",
+  "rollupRpcUrl": "http://127.0.0.1:9547",
+  "drivechain": {
+    "sidechainId": 1,
+    "enforcerRpcUrl": "http://127.0.0.1:8123/",
+    "litecoinRpcUrl": "http://127.0.0.1:39333/",
+    "bridgeContract": "LiteVerseBridge",
+    "relayer": "drivechain-evm/bridge-relayer"
+  }
+}
