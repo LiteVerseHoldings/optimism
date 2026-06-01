@@ -22,7 +22,7 @@ services:
       --rollup.l1-chain-config=/workspace/l1-op-node-genesis.json
       --sequencer.enabled=true
       --sequencer.stopped=false
-      --sequencer.max-safe-lag=3600
+      --sequencer.max-safe-lag=1000000
       --verifier.l1-confs=1
       --p2p.disable
       --rpc.addr=0.0.0.0
