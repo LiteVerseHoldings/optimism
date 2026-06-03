@@ -59,6 +59,11 @@ check_prerequisites() {
         exit 1
     fi
 
+    if ! command -v cast &> /dev/null; then
+        log_error "cast not found. Install Foundry so setup can derive real role addresses from generated private keys."
+        exit 1
+    fi
+
     log_success "Prerequisites check passed"
 }
 
@@ -80,11 +85,10 @@ generate_addresses() {
             private_key=$(openssl rand -hex 32)
         done
 
-        # For this demo, we'll create a fake but valid Ethereum address
-        # In a real scenario, you'd derive the actual Ethereum address from the private key
-        # Create a 40-character hex address (20 bytes)
-        address="0x$(echo "$private_key" | head -c 40)"
+        address=$(cast wallet address --private-key "0x$private_key")
         echo "$address" > "${role}_address.txt"
+        echo "$private_key" > "${role}_private_key.txt"
+        chmod 600 "${role}_private_key.txt"
         log_info "Created wallet for $role: $address"
     done
 
@@ -218,7 +222,7 @@ setup_batcher() {
     cat > .env << EOF
 OP_BATCHER_L2_ETH_RPC=http://op-geth:8545
 OP_BATCHER_ROLLUP_RPC=http://op-node:8547
-OP_BATCHER_PRIVATE_KEY=$PRIVATE_KEY
+OP_BATCHER_PRIVATE_KEY=$(cat "$DEPLOYER_DIR/addresses/batcher_private_key.txt")
 OP_BATCHER_POLL_INTERVAL=1s
 OP_BATCHER_SUB_SAFETY_MARGIN=6
 OP_BATCHER_NUM_CONFIRMATIONS=1
@@ -245,7 +249,7 @@ setup_proposer() {
     # Create .env file with OP_PROPOSER prefixed variables
     cat > .env << EOF
 OP_PROPOSER_GAME_FACTORY_ADDRESS=$GAME_FACTORY_ADDR
-OP_PROPOSER_PRIVATE_KEY=$PRIVATE_KEY
+OP_PROPOSER_PRIVATE_KEY=$(cat "$DEPLOYER_DIR/addresses/proposer_private_key.txt")
 OP_PROPOSER_POLL_INTERVAL=20s
 OP_PROPOSER_GAME_TYPE=0
 OP_PROPOSER_PROPOSAL_INTERVAL=3600s
@@ -289,7 +293,7 @@ setup_challenger() {
     # Create .env file with OP_CHALLENGER prefixed variables
     cat > .env << EOF
 OP_CHALLENGER_GAME_FACTORY_ADDRESS=$GAME_FACTORY_ADDR
-OP_CHALLENGER_PRIVATE_KEY=$PRIVATE_KEY
+OP_CHALLENGER_PRIVATE_KEY=$(cat "$DEPLOYER_DIR/addresses/challenger_private_key.txt")
 OP_CHALLENGER_CANNON_PRESTATE=/workspace/$CHALLENGER_PRESTATE_FILE
 EOF
 

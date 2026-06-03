@@ -75,7 +75,6 @@ services:
       - .env
     environment:
       - OP_BATCHER_L1_ETH_RPC=${L1_RPC_URL}
-      - OP_BATCHER_PRIVATE_KEY=${PRIVATE_KEY}
     command: >
       op-batcher
       --rpc.addr=0.0.0.0
@@ -102,7 +101,6 @@ services:
       - .env
     environment:
       - OP_PROPOSER_L1_ETH_RPC=${L1_RPC_URL}
-      - OP_PROPOSER_PRIVATE_KEY=${PRIVATE_KEY}
     command: >
       op-proposer
       --rpc.port=8560
@@ -128,7 +126,6 @@ services:
     environment:
       - OP_CHALLENGER_L1_ETH_RPC=${L1_RPC_URL}
       - OP_CHALLENGER_L1_BEACON=${L1_BEACON_URL}
-      - OP_CHALLENGER_PRIVATE_KEY=${PRIVATE_KEY}
     command: >
       op-challenger run-trace
       --trace-type=cannon
