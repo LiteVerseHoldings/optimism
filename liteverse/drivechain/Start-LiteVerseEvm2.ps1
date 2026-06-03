@@ -32,6 +32,7 @@ if (-not (Test-Path -LiteralPath $overrideCompose)) {
 $requiredArtifacts = @(
   ".env",
   "sequencer\genesis.json",
+  "sequencer\l1-op-node-genesis.json",
   "sequencer\rollup.json",
   "sequencer\jwt.txt"
 )

@@ -3,6 +3,7 @@ param(
   [string]$DeployerPrivateKey = "",
   [string]$OperatorAddress = "",
   [int]$SidechainId = 1,
+  [UInt64]$EvmChainId = 713318,
   [string]$EvmRpcUrl = "http://127.0.0.1:9545",
   [string]$DeploymentOut = "",
   [string]$ConfigPath = "",
@@ -41,6 +42,7 @@ if (-not $DeployerPrivateKey) {
 $deployArgs = @{
   DeployerPrivateKey = $DeployerPrivateKey
   SidechainId = $SidechainId
+  EvmChainId = $EvmChainId
   EvmRpcUrl = $EvmRpcUrl
   DeploymentOut = $DeploymentOut
 }

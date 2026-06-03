@@ -70,6 +70,7 @@ The deployer account must have native gas on OP EVM #2.
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\liteverse\drivechain\Deploy-LiteVerseBridge.ps1 `
   -DeployerPrivateKey 0x... `
   -OperatorAddress 0x... `
+  -EvmChainId 713318 `
   -UpdateConfig
 ```
 
